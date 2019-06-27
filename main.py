@@ -41,12 +41,25 @@ FLOORS = {
 
 import copy
 
+
+def check_teams_same_floor(teamA, teamB, c):
+    for floor in c:
+        if teamA in floor and teamB in floor:
+            return True
+    return False
+
+
+def check_team_in_floor(teamA, floor):
+    return teamA in floor
+
+
 def unique(list1):
     unique_list = []
     for x in list1:
         if x not in unique_list:
             unique_list.append(x)
     return unique_list
+
 
 def combine_floor(teams, nb_places):
     answers = []
@@ -56,7 +69,7 @@ def combine_floor(teams, nb_places):
         answer = [team]
         for team in teams:
             size = TEAMS[team]
-            if answer_size+size <= nb_places+4 and team not in answer:
+            if answer_size + size <= nb_places and team not in answer:
                 answer.append(team)
                 answer_size += size
         answer.sort()
@@ -64,62 +77,48 @@ def combine_floor(teams, nb_places):
     return unique(answers)
 
 
+def count_floor(floor):
+    c = 0
+    for team in floor:
+        c = c + TEAMS[team]
+    return c
 
 
 Combinaisons = []
 teams = TEAMS.keys()
 for combi_1st in combine_floor(teams, FLOORS['1st']):
-
     reste1 = copy.copy(teams)
     for el in combi_1st:
         reste1.remove(el)
+    if len(reste1) == 0:
+        Combinaisons.append([combi_1st, [], [], []])
     for combi_2nd in combine_floor(reste1, FLOORS['2nd']):
         reste2 = copy.copy(reste1)
         for el in combi_2nd:
             reste2.remove(el)
+        if len(reste2) == 0:
+            Combinaisons.append([combi_1st, combi_2nd, [], []])
         for combi_3rd in combine_floor(reste2, FLOORS['3rd']):
             reste3 = copy.copy(reste2)
             for el in combi_3rd:
                 reste3.remove(el)
+            if len(reste3) == 0:
+                Combinaisons.append([combi_1st, combi_2nd, combi_3rd, []])
             for combi_5th in combine_floor(reste3, FLOORS['5th']):
                 reste = copy.copy(reste3)
                 for el in combi_5th:
                     reste.remove(el)
                     if len(reste) == 0:
-                        Combinaisons.append([combi_1st,combi_2nd,combi_3rd, combi_5th])
-
-
-
-def check_teams_same_floor(teamA, teamB, c):
-    for floor in c:
-        if teamA in floor and teamB in floor:
-            return True
-    return False
-
-def check_team_in_floor(teamA, floor):
-    return teamA in floor
-
-
+                        Combinaisons.append([combi_1st, combi_2nd, combi_3rd, combi_5th])
 
 print len(Combinaisons)
+satisfied = []
 for c in Combinaisons:
-    # check qualif is same floor as data
-    if not check_teams_same_floor('QUALIF', 'DATA', c):
-        continue
-    if not check_teams_same_floor('TEA', 'TREX', c):
-        continue
-    #if not check_teams_same_floor('TEA', 'NUMBERS', c):
-    #    continue
-    if not check_teams_same_floor('INSPI', 'BRAND', c):
-        continue
-    if not check_teams_same_floor('DESTI', 'OFFER', c):
-        continue
-    if not check_teams_same_floor('DESTI', 'TIPI', c):
-        continue
-    #if check_team_in_floor('DESTI',c[0]):
-    #    continue
-    #if check_team_in_floor('TEA',c[0]):
-    #    continue
-    #if not check_team_in_floor('CC',c[1]) and not check_team_in_floor('CC',c[3]):
-    #    continue
+
+    if check_teams_same_floor('TEA', 'TREX', c) \
+        and check_teams_same_floor('TEA', 'NUMBERS', c):
+        satisfied.append(c)
+
+print len(satisfied)
+for c in satisfied:
     print c
