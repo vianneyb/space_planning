@@ -1,48 +1,102 @@
-TEAMS = {
-    "laurent": 1,
-    "FR-ADM": 11,
-    "SE-ADM": 10,
-    "NE-ADM": 8,
-    "UK-ADM": 4,
-    "DD-ADM": 2,
-    "CC": 14,
-    "DESTI": 9,
-    "CRM": 6,
-    "OFFER": 7,
-    "FR-OF": 5,
-    "NE-OF": 2,
-    "UK-OF": 2,
-    "SE-OF": 4,
-    "QUALIF": 4,
-    "DATA": 14,
-    "HP": 8,
-    "TREX": 12,
-    "TEA": 12,
-    "TIPI": 10,
-    "LAC": 10,
-    "NUMBERS": 8,
-    "INTERNAL": 4,
-    "BRAND": 10,
-    "INSPI": 8,
-    "NE-MARKET": 11,
-    "SE-MARKET": 8,
-    "UK-MARKET": 4,
-    "FR-MARKET": 8,
-    "AKI": 12,
+import copy
+
+SOURCE = {
+    "FR_ADM": ["Melanie", "Anne-Dauphine", "Michel", "Magali", "Juliette", "Anne", "Natalia", "Constance", "Faizath",
+               "Marion", "Caro"],
+    "SE_ADM": ["Anais", "Paola", "Mariel", "Hugo", "Pamela", "Giacomo", "Roddy", "Laura", "Anne_Camille"],
+    "NE_ADM": ["Johanna", "Michelle", "Bjarne", "yannique", "Katharina", "Oliver", "Laura", "Nelleke", "Lonneke"],
+    "UK_ADM": ["Alexis", "shelbi", "Floriane", "Hattie"],
+    "DD_ADM": ["Samy", "Carlos", "Dana"],
+    "CC": ["Barbara", "Lisa", "Clara", "Annekatrin", "Katrin", "Veronica", "Vicente", "Veronique", "Annabelle",
+           "Celine", "Caroline", "Nabil", "Salome", "Guillaume"],
+    "DESTI": ["christophe", "axelle", "dutto", "toto", "tilleul", "jonathan", "theodo1", "theodo2", "theodo3",
+              "Arthur"],
+    "CRM": ["dudu", "marie", "marie_C", "yushan", "akshita", "mathilde"],
+    "OFFER": ["cristina", "jessica", "claire", "Stagiaire_Offer", "Lucie_B", "Lucie_D"],
+    "FR_OF": ["Sandrine", "Juliette", "Frederique", "Mathilde", "Severine"],
+    "NE_OF": ["Marion", "Philip", "Lisa"],
+    "UK_OF": ["Rebecca", "Craig"],
+    "SE_OF": ["Silvia", "Marta", "Cristina", "Benedetta"],
+    "QUALIF": ["PO_Chloe", "jocelyne", "quentin", "timothe", "Henning"],
+    "DATA": ["Adrien", "Renata", "Alexis", "Camille", "Louis", "Aurore", "Stagiaire_Datascience", "Agnes", "Jean",
+             "Axel", "Johann", "lead_data_inge", "lead_data_inge", "Data_Mkt"],
+    "HP": ["Caro", "Claire", "Alternant_RH", "Julie", "HRBP2", "Marion", "Clement", "HRBP1"],
+    "TREX": ["Julien", "benoitSab", "Zigzag", "benoit", "jack", "marc_alex", "chad", "arnaud", "Fiona", "thibaut",
+             "erik"],
+    "TEA": ["fred", "polval", "skander", "Pablo", "Paul", "lucas", "raph", "tony", "jb", "audrey", "freelance_1",
+            "freelance_2", "Pablo"],
+    "TIPI": ["julien", "herve", "jean", "sofiane", "loic", "chacha", "sami", "sofiane", "theodo1", "theodo2", "theodo3",
+             "adrian"],
+    "LAC": ["mariana", "loredana", "sego", "arnaud", "solene", "david", "emmanuel", "flora", "lise", "paula"],
+    "NUMBERS": ["Maxime", "Rihab", "Guillaume", "Alexandre", "Arnaud", "AnaisB", "Stagiaire_legal"],
+    "INTERNAL": ["renald", "thomas", "emmanuel", "antoineL", "Yoan", "Regis", "RomainQ"],
+    "BRAND": ["florian", "fanny", "delphine", "adrien", "clement", "meline", "aurelie", "julien", "resp content",
+              "barbara"],
+    "INSPI": ["william", "yoann", "thierry", "roxane", "laurent", "elodie", "marine", "Dev_front"],
+    "NE_MARKET": ["jenny", "carolin", "verena", "julia", "moniek", "joost", "andrea", "tamara", "dejana", "sanne"],
+    "SE_MARKET": ["david", "maria", "soisic", "nuria", "viola", "valeria", "eleonoraD", "eleonoraZ"],
+    "UK_MARKET": ["jessica", "anuja", "chloe", "tiphanie"],
+    "FR_MARKET": ["emilie", "india", "romain", "chloe", "megan", "chloe", "marionA"],
+    "AKI": ["resp_display", "marion", "roland", "clemence", "Medhi", "nicolasC", "Benoit", "juan"],
+    "AGENT": ["Agents", "Agents", "Agents", "Agents"],
+    "CM - ANNIKA": ["annika"],
+    "CM - UK": ["CM UK"],
+    "CM - SARAH": ["Sarah"],
+    "Arthur": ["arthur"],
+    "Vianney": ["vianney"],
+    "CODIR - Nas": ["Nas"],
+    "CODIR - Daniele": ["Daniele"],
+    "CODIR - Laurent": ["Laurent"],
+    "CODIR - Benoit": ["Benoit"],
+    "CODIR - Amelie": ["Amelie"],
+
 }
 
 TEAMS = {
-    "DESTI-FULL_OFFER-QUALIF-DATA-TIPI": TEAMS["DESTI"] + TEAMS["OFFER"] + TEAMS["FR-OF"] + TEAMS["NE-OF"] + TEAMS["UK-OF"] + TEAMS["SE-OF"]+ TEAMS["QUALIF"] +TEAMS["DATA"]+TEAMS["TIPI"],
-    "LocalMarketing": TEAMS["FR-MARKET"] + TEAMS["NE-MARKET"] + TEAMS["UK-MARKET"] + TEAMS["SE-MARKET"],
-    "AKI-BRAND+INSPI+CRM": TEAMS["AKI"] + TEAMS["BRAND"] + TEAMS["INSPI"] + TEAMS["CRM"],
-    "ADM-DD-LAC-TEA": TEAMS["TEA"] + TEAMS['FR-ADM'] + TEAMS['SE-ADM'] + TEAMS['NE-ADM'] + TEAMS['UK-ADM'] + TEAMS["laurent"] + TEAMS["LAC"] + TEAMS["DD-ADM"],
-    "NUMBERS+HP": TEAMS["NUMBERS"]+TEAMS["HP"],
-    "CC": 14,
-    "TREX": 12,
-    "INTERNAL": 5,
+    "LOCAL_ADM_TIPI_LAC": SOURCE["FR_ADM"] + SOURCE["SE_ADM"] + SOURCE["NE_ADM"] + SOURCE["UK_ADM"] + SOURCE["TEA"] +
+                          SOURCE["LAC"],
+    "DD_ADM": SOURCE["DD_ADM"],
+    "CC": SOURCE["CC"],
+    "DESTI_QUALIF_OFFER_LOCAL_OFFER_TIPI": SOURCE["DESTI"] + SOURCE["OFFER"] + SOURCE["QUALIF"] + SOURCE["FR_OF"] +
+                                           SOURCE["SE_OF"] + SOURCE["NE_OF"] + SOURCE["UK_OF"] + SOURCE["TIPI"],
+    "DATA": SOURCE["DATA"],
+    "HP": SOURCE["HP"],
+    "TREX": SOURCE["TREX"],
+    # "NUMBERS": SOURCE["NUMBERS"],
+    # "INTERNAL": SOURCE["INTERNAL"],
+    # "AKI-BRAND-CRM-INSPI": SOURCE["AKI"] + SOURCE["BRAND"] + SOURCE["CRM"] + SOURCE["INSPI"],
+    # "LOCAL_MARKET": SOURCE["FR_MARKET"] + SOURCE["SE_MARKET"] + SOURCE["NE_MARKET"] + SOURCE["UK_MARKET"],
+    # "AGENT": ["Agents", "Agents", "Agents", "Agents"],
+    # "CM - ANNIKA": ["annika"],
+    # "CM - UK": ["CM UK"],
+    # "CM - SARAH": ["Sarah"],
+    # "Arthur": ["arthur"],
+    # "Vianney": ["vianney"],
+    # "CODIR - Nas": ["Nas"],
+    # "CODIR - Daniele": ["Daniele"],
+    # "CODIR - Laurent": ["Laurent"],
+    # "CODIR - Benoit": ["Benoit"],
+    # "CODIR - Amelie": ["Amelie"],
 
 }
 
+TEAMS = {
+    "A": SOURCE["Arthur"],
+    "B": SOURCE["Arthur"],
+    "C": SOURCE["CC"],
+    "D": SOURCE["Arthur"],
+}
+# TEAMS = {
+#    "DESTI-FULL_OFFER-QUALIF-DATA-TIPI": TEAMS["DESTI"] + TEAMS["OFFER"] + TEAMS["FR-OF"] + TEAMS["NE-OF"] + TEAMS["UK-OF"] + TEAMS["SE-OF"]+ TEAMS["QUALIF"] +TEAMS["DATA"]+TEAMS["TIPI"],
+#    "LocalMarketing": TEAMS["FR-MARKET"] + TEAMS["NE-MARKET"] + TEAMS["UK-MARKET"] + TEAMS["SE-MARKET"],
+#    "AKI-BRAND+INSPI+CRM": TEAMS["AKI"] + TEAMS["BRAND"] + TEAMS["INSPI"] + TEAMS["CRM"],
+#    "ADM-DD-LAC-TEA": TEAMS["TEA"] + TEAMS['FR-ADM'] + TEAMS['SE-ADM'] + TEAMS['NE-ADM'] + TEAMS['UK-ADM'] + TEAMS["laurent"] + TEAMS["LAC"] + TEAMS["DD-ADM"],
+#    "NUMBERS+HP": TEAMS["NUMBERS"]+TEAMS["HP"],
+#    "CC": 14,
+#    "TREX": 12,
+#    "INTERNAL": 5,
+#
+# }
 
 
 """
@@ -63,24 +117,23 @@ TEAMS = {
 """
 
 # arthur vianney nas daniele laurent samy carlos dana
-
+F1 = '1st'
+F2 = '2nd'
+F3 = '3rd'
+F5 = '5th'
 
 FLOORS = {
-    "1st": 52,
-    "2nd": 58,  # 1 bench
-    "3rd": 72,  # +2 bench + bonus
-    "5th": 58,  # +2 bench
+    F1: 52,
+    F2: 58,  # 1 bench
+    F3: 72,  # +2 bench + bonus
+    F5: 58,  # +2 bench
 }
 
 
-
-
-import copy
-
-
 class Team(object):
-    def __init__(self, label, size):
-        self.size = size
+    def __init__(self, label, members=[]):
+        self.members = members
+        self.size = len(members)
         self.label = label
 
     def __str__(self):
@@ -122,7 +175,6 @@ class Floor(object):
 
     def append(self, team):
         self.teams.append(team)
-        self.teams.sort()
         self.sum += team.size
 
     def fit(self, aTeam):
@@ -145,16 +197,53 @@ class Floor(object):
         other.teams.sort()
         return self.teams == other.teams
 
+    def __ge__(self, other):
+        return self.label >= other.label
+
+    def __gt__(self, other):
+        return self.label > other.label
+
+    def __le__(self, other):
+        return self.label <= other.label
+
+    def __lt__(self, other):
+        return self.label < other.label
+
+    def __contains__(self, item):
+        return item in self.teams
+
+
+class Combinaison(object):
+    def __init__(self, floors):
+        self.floors = floors
+
+    def check_team_in_floor(self, team, floor):
+        for f in self.floors:
+            if f.label == floor and team in f:
+                return True
+
+        return False
+
+    def is_valid(self):
+        if self.check_team_in_floor(Team("TREX"), F1):
+            return False
+        if not self.check_team_in_floor(Team("AKI-BRAND+INSPI+CRM"), F1):
+            return False
+        return True
+
+    def __str__(self):
+        str = ""
+        self.floors.sort()
+        for f in self.floors:
+            str += "%s\n" % f.__str__()
+        return str
+
 
 def check_teams_same_floor(teamA, teamB, c):
     for floor in c:
         if teamA in floor and teamB in floor:
             return True
     return False
-
-
-def check_team_in_floor(teamA, floor):
-    return teamA in floor
 
 
 def unique(list1):
@@ -165,110 +254,23 @@ def unique(list1):
     return unique_list
 
 
-def combine_floor(teams, nb_places):
-    answers = []
-
-    for team in teams:
-        if TEAMS[team] > nb_places:
-            continue
-        answer_size = TEAMS[team]
-        answer = [team]
-        for team in teams:
-            size = TEAMS[team]
-            if answer_size + size <= nb_places and team not in answer:
-                answer.append(team)
-                answer_size += size
-        answer.sort()
-        answers.append(answer)
-    answers.sort()
-    return unique(answers)
-
-
 def combine_floor_obj(teams, floor):
-    answers = []
-
-    for team in teams:
-        if not floor.fit(team):
-            continue
-
-        combinaison = copy.deepcopy(floor)
-        combinaison.append(team)
-
-        for team in teams:
-            if not combinaison.fit(team):
-                continue
-
-            combinaison_rec = copy.deepcopy(combinaison)
-            combinaison_rec.append(team)
-            for team2 in teams:
-                if not combinaison_rec.fit(team2):
-                    continue
-                combinaison_rec.append(team2)
-            answers.append(combinaison_rec)
-        answers.append(combinaison)
-    answers.sort()
-    print answers
-    return unique(answers)
-
-
-def combine_floor_obj(teams, floor):
-    """
-        [FR-ADM (4), laurent (5), SE-ADM (3), NE-ADM (6)] Floor 5th (sum=0, teams=[])
-            [laurent (5), SE-ADM (3), NE-ADM (6)] Floor 5th (sum=0, teams=[FR-ADM (4)])
-                [SE-ADM (3), NE-ADM (6)] Floor 5th (sum=0, teams=[FR-ADM (4), laurent (5)])
-                    [SE-ADM (3), NE-ADM (6)] Floor 5th (sum=0, teams=[FR-ADM (4), laurent (5)])
-                [laurent (5), NE-ADM (6)] Floor 5th (sum=0, teams=[FR-ADM (4), SE-ADM (3)])
-                [laurent (5), SE-ADM (3)] Floor 5th (sum=0, teams=[FR-ADM (4), NE-ADM (6)])
-            [FR-ADM (4), SE-ADM (3), NE-ADM (6)] Floor 5th (sum=0, teams=[laurent (5)])
-            [FR-ADM (4), laurent (5), NE-ADM (6)] Floor 5th (sum=0, teams=[SE-ADM (3)])
-            [FR-ADM (4), laurent (5), SE-ADM (3)] Floor 5th (sum=0, teams=[NE-ADM (6)])
-    """
-
-
-    def combine_floor_obj_rec(teams, floor, answers=[], p=1):
-        """
-
-        :param teams:
-        :param floor: Floor
-        :param answers:
-        :param p:
-        :return:
-        """
+    def combine_floor_obj_rec(teams, floor, answers):
+        print len(answers)
         for team in teams:
             if floor.fit(team):
-                #new branch
+                # new branch
                 combinaison = copy.deepcopy(floor)
                 combinaison.append(team)
                 answers.append(combinaison)
-
-                #try to fill the rest of the branch with the rest of the teams
+                print combinaison
+                # try to fill the rest of the branch with the rest of the teams
                 reste = copy.copy(teams)
                 reste.remove(team)
-                combine_floor_obj_rec(reste, combinaison, answers, p+1)
+                combine_floor_obj_rec(reste, combinaison, answers)
 
     answers = []
     combine_floor_obj_rec(teams, floor, answers)
-
-    return unique(answers)
-
-def combine_floor2(teams, nb_places):
-    answers = []
-
-    def combine_floor_rec(teams, nb_places, answer=[]):
-        for team in teams:
-            team_size = TEAMS[team]
-            if team_size <= nb_places and team not in answer:
-                reste = (copy.copy(teams))
-                reste.remove(team)
-                next_answer = copy.copy(answer)
-                next_answer.append(team)
-                combine_floor_rec(reste, nb_places - team_size, next_answer)
-
-        answer.sort()
-        answers.append(answer)
-
-    combine_floor_rec(teams, nb_places, [])
-    print answers
     return unique(answers)
 
 
@@ -279,9 +281,14 @@ def count_floor(floor):
     return c
 
 
+def compute_teams_not_used(floor, team_list):
+    tmp_teams_not_used = copy.copy(team_list)
+    for ateam in floor.teams:
+        tmp_teams_not_used.remove(ateam)
+    return tmp_teams_not_used
 
 
-Combinaisons = []
+combinaisons = []
 teams = []
 floors = []
 for t in TEAMS.iteritems():
@@ -293,16 +300,10 @@ for f in FLOORS.iteritems():
 print teams
 print floors
 
-
-def compute_teams_not_used(floor, team_list):
-    tmp_teams_not_used = copy.copy(team_list)
-    for ateam in floor.teams:
-        tmp_teams_not_used.remove(ateam)
-    return tmp_teams_not_used
-
-
-for combi_1st in combine_floor_obj(teams, floors[0]):
-    print "-->",combi_1st
+first = combine_floor_obj(teams, floors[0])
+raw_input("fin")
+print len(first)
+for combi_1st in first:
     teams_not_used = compute_teams_not_used(combi_1st, teams)
     for combi_2nd in combine_floor_obj(teams_not_used, floors[1]):
         teams_not_used2 = compute_teams_not_used(combi_2nd, teams_not_used)
@@ -314,18 +315,18 @@ for combi_1st in combine_floor_obj(teams, floors[0]):
                 teams_not_used4 = compute_teams_not_used(combi_5th, teams_not_used3)
 
                 if len(teams_not_used4) == 0:
-                    Combinaisons.append([combi_1st, combi_2nd, combi_3rd, combi_5th])
+                    combinaison = Combinaison([combi_1st, combi_2nd, combi_3rd, combi_5th])
+                    if combinaison.is_valid():
+                        combinaisons.append(combinaison)
 
-print "NEW"
-print len(Combinaisons)
+print len(combinaisons)
 satisfied = []
-for c in Combinaisons:
-    if not check_team_in_floor('TREX', c[0]) \
-            and not check_team_in_floor('DESTI-FULL_OFFER-QUALIF-DATA', c[0]):
-        satisfied.append(c)
+for combinaison in combinaisons:
+    print combinaison
+    # if not check_team_in_floor('TREX', F1) \
+    #        and not check_team_in_floor('DESTI-FULL_OFFER-QUALIF-DATA', F1):
+    #    satisfied.append(c)
 
-print len(satisfied)
-for c in satisfied:
-    for fl in c:
-        print fl
-    print "---------------"
+
+
+
