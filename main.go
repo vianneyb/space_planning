@@ -57,8 +57,8 @@ var (
 
 func main() {
 
-	teams := buildTeams2()
-	building := buildBuilding2()
+	teams := buildTeams()
+	building := buildBuilding()
 
 	if !building.IsBigEnoughForTeams(teams) {
 		fmt.Println("No enought space in floors to fit everyone !!")
