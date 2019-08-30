@@ -30,13 +30,16 @@ func floorFactoryFull(name string, size int, teams []Team) Floor {
 func (floor Floor) WithTeam(team Team) Floor {
 
 	// ----
-	teams := make([]Team, len(floor.Teams)+2)
-	k := 0
-	for _, t := range floor.Teams {
-		teams[k] = t
-		k++
-	}
-	teams[k+1] = team
+	// teams := make([]Team, len(floor.Teams)+2)
+	// k := 0
+	// for _, t := range floor.Teams {
+	// 	teams[k] = t
+	// 	k++
+	// }
+	// teams[k+1] = team
+	//
+
+	teams := append(floor.Teams, team)
 	// ---> could have use append but some weird memory overlap happened
 	return floorFactoryFull(floor.Name, floor.Size, teams)
 }
